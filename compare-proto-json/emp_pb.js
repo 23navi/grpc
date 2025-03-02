@@ -289,7 +289,8 @@ proto.Employees.prototype.toObject = function(opt_includeInstance) {
 proto.Employees.toObject = function(includeInstance, msg) {
   var f, obj = {
     employeesList: jspb.Message.toObjectList(msg.getEmployeesList(),
-    proto.Employee.toObject, includeInstance)
+    proto.Employee.toObject, includeInstance),
+    type: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
   if (includeInstance) {
@@ -331,6 +332,10 @@ proto.Employees.deserializeBinaryFromReader = function(msg, reader) {
       reader.readMessage(value,proto.Employee.deserializeBinaryFromReader);
       msg.addEmployees(value);
       break;
+    case 2:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setType(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -366,6 +371,13 @@ proto.Employees.serializeBinaryToWriter = function(message, writer) {
       1,
       f,
       proto.Employee.serializeBinaryToWriter
+    );
+  }
+  f = message.getType();
+  if (f.length > 0) {
+    writer.writeString(
+      2,
+      f
     );
   }
 };
@@ -406,6 +418,24 @@ proto.Employees.prototype.addEmployees = function(opt_value, opt_index) {
  */
 proto.Employees.prototype.clearEmployeesList = function() {
   return this.setEmployeesList([]);
+};
+
+
+/**
+ * optional string type = 2;
+ * @return {string}
+ */
+proto.Employees.prototype.getType = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.Employees} returns this
+ */
+proto.Employees.prototype.setType = function(value) {
+  return jspb.Message.setProto3StringField(this, 2, value);
 };
 
 
